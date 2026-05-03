@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class Catebuttons extends StatelessWidget {
   Catebuttons({super.key, required this.cateName});
   List<String> cateName = [];
