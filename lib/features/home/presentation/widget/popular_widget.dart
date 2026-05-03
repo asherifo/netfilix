@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class TopRatedWidget extends StatelessWidget {
-  const TopRatedWidget({super.key});
+class PopularWidget extends StatelessWidget {
+  const PopularWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -10,12 +10,8 @@ class TopRatedWidget extends StatelessWidget {
       child: Column(
         spacing: 8,
         crossAxisAlignment: CrossAxisAlignment.start,
-
         children: [
-          Text(
-            'Top Rated',
-            style: TextStyle(color: Colors.white, fontSize: 16),
-          ),
+          Text('Popular', style: TextStyle(color: Colors.white, fontSize: 16)),
 
           SizedBox(
             height: 158,
@@ -28,15 +24,9 @@ class TopRatedWidget extends StatelessWidget {
                   child: InkWell(
                     onTap: () {
                       // ignore: avoid_print
-                      print('Top Rated Movie');
+                      print('Go To Popular Movie');
                     },
-                    child: InkWell(
-                      onTap: () {
-                        // ignore: avoid_print
-                        print('Go To Top Rated Movie');
-                      },
-                      child: Image.asset('assets/images/movie.png'),
-                    ),
+                    child: Image.asset('assets/images/movie2.png'),
                   ),
                 );
               },

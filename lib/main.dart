@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:netfilix/Screens/splash_screen.dart';
+import 'package:netfilix/features/splash/presentation/splash_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -21,6 +21,8 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
       home: SplashScreen(),
+      themeMode: ThemeMode.dark,
+      debugShowMaterialGrid: true,
     );
   }
 }

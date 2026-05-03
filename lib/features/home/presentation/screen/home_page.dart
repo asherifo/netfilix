@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:netfilix/Screens/first_Page.dart';
+import 'package:netfilix/features/home/presentation/screen/first_page.dart';
 
 class Homepage extends StatelessWidget {
   const Homepage({super.key});

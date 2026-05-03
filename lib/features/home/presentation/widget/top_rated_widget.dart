@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:netfilix/Screens/detailmovie.dart';
 
-class NowWatchingWidget extends StatelessWidget {
-  const NowWatchingWidget({super.key});
+class TopRatedWidget extends StatelessWidget {
+  const TopRatedWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -11,15 +10,15 @@ class NowWatchingWidget extends StatelessWidget {
       child: Column(
         spacing: 8,
         crossAxisAlignment: CrossAxisAlignment.start,
+
         children: [
           Text(
-            'Now Watching',
+            'Top Rated',
             style: TextStyle(color: Colors.white, fontSize: 16),
           ),
 
           SizedBox(
             height: 158,
-
             child: ListView.builder(
               itemCount: 10,
               scrollDirection: Axis.horizontal,
@@ -29,21 +28,9 @@ class NowWatchingWidget extends StatelessWidget {
                   child: InkWell(
                     onTap: () {
                       // ignore: avoid_print
-                      print('Now Watching Movie');
-                      // Navigator.of(context).pushReplacement(
-                      //   MaterialPageRoute(builder: (context) => Detailmovie()),
-                      // );
+                      print('Go To Top Rated Movie');
                     },
-                    child: InkWell(
-                      onTap: () {
-                        // ignore: avoid_print
-                        print('Go To NOW Watching Movie');
-                      },
-                      child: Image.asset(
-                        'assets/images/movie.png',
-                        fit: BoxFit.cover,
-                      ),
-                    ),
+                    child: Image.asset('assets/images/movie.png'),
                   ),
                 );
               },

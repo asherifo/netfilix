@@ -1,8 +1,7 @@
 import 'package:lottie/lottie.dart';
 
 import 'package:flutter/material.dart';
-import 'package:netfilix/Screens/home_page.dart';
-//import 'package:netfilix/Screens/homepage.dart';
+import 'package:netfilix/features/home/presentation/screen/home_page.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
