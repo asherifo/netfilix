@@ -5,8 +5,8 @@ import 'package:netfilix/features/details/logic/detail_state.dart';
 
 // ignore: must_be_immutable
 class Detailmovie extends StatelessWidget {
-  Detailmovie({super.key});
-  List detailList = [];
+  const Detailmovie({super.key, required this.indexMovie});
+  final int indexMovie;
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +22,8 @@ class Detailmovie extends StatelessWidget {
               ),
             );
           } else if (state is DetailSuccessState) {
-            final movie = state.detailmodel;
+            final movie = state.movieDetailModel;
+
             return Scaffold(
               backgroundColor: Colors.black,
               body: SingleChildScrollView(
@@ -32,7 +33,7 @@ class Detailmovie extends StatelessWidget {
                     Padding(
                       padding: EdgeInsets.only(top: 40),
                       child: Image.network(
-                        "https://image.tmdb.org/t/p/w500${movie.parts[0].posterPath!}",
+                        "https://image.tmdb.org/t/p/w500${movie.results![indexMovie].backdropPath!}",
                         fit: BoxFit.fill,
                         height: 222,
                         width: double.infinity,
@@ -41,7 +42,7 @@ class Detailmovie extends StatelessWidget {
                     Padding(
                       padding: EdgeInsets.only(top: 1, left: 10),
                       child: Text(
-                        movie.parts[0].title,
+                        movie.results![indexMovie].originalTitle!,
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 16,
@@ -54,7 +55,7 @@ class Detailmovie extends StatelessWidget {
                       child: Row(
                         children: [
                           Text(
-                            movie.parts[0].releaseDate,
+                            movie.results![indexMovie].releaseDate!,
                             style: TextStyle(
                               color: Colors.white,
                               fontSize: 16,
@@ -63,7 +64,7 @@ class Detailmovie extends StatelessWidget {
                           ),
                           Image.asset('assets/icons/ratingIcon.png'),
                           Text(
-                            ' ${movie.parts[0].voteAverage} ',
+                            ' ${movie.results![indexMovie].voteAverage!} ',
                             style: TextStyle(
                               color: Colors.white,
                               fontSize: 16,
@@ -78,7 +79,7 @@ class Detailmovie extends StatelessWidget {
                     Padding(
                       padding: EdgeInsets.only(left: 8, right: 8, bottom: 8),
                       child: Text(
-                        movie.name,
+                        movie.results![indexMovie].overview!,
                         style: TextStyle(
                           fontSize: 12,
                           fontWeight: FontWeight(400),
@@ -193,42 +194,61 @@ class Detailmovie extends StatelessWidget {
                         ),
                       ),
                     ),
-                    SingleChildScrollView(
-                      scrollDirection: Axis.vertical, // الحركة فوق وتحت
-                      child: SingleChildScrollView(
-                        scrollDirection: Axis.horizontal, // الحركة يمين وشمال
-                        child: Column(
-                          children: List.generate(20, (rowIndex) {
-                            return Row(
-                              children: List.generate(10, (colIndex) {
-                                return Container(
-                                  width: 110, // عرض ثابت لكل عنصر
-                                  height: 158, // طول ثابت لكل عنصر
-                                  margin: EdgeInsets.all(2),
-                                  color: Colors.transparent,
-                                  child: Center(
-                                    child: Image.asset(
-                                      "assets/images/movie.png",
-                                      // width: 110,
-                                      // height: 158,
-                                      fit: BoxFit.fill,
-                                    ),
-                                  ),
-                                );
-                              }),
-                            );
-                          }),
+                    SizedBox(
+                      height: 350,
+
+                      child: GridView.builder(
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 4,
+                          crossAxisSpacing: 2,
+                          mainAxisSpacing: 10,
                         ),
+                        itemCount: movie.results!.length,
+                        itemBuilder: (context, index) {
+                          return InkWell(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      Detailmovie(indexMovie: index),
+                                ),
+                              );
+                            },
+                            child: Image.network(
+                              "https://image.tmdb.org/t/p/w500${movie.results![index].posterPath}",
+                              height: 180,
+                              width: 120,
+                              fit: BoxFit.fill,
+                            ),
+                          );
+                        },
                       ),
                     ),
                   ],
                 ),
               ),
+              floatingActionButtonLocation:
+                  FloatingActionButtonLocation.startTop,
+              floatingActionButton: FloatingActionButton(
+                backgroundColor: Colors.transparent,
+                onPressed: () {
+                  Navigator.pushNamedAndRemoveUntil(
+                    context,
+                    '/HomePage',
+                    (route) => false,
+                    //  MaterialPageRoute(builder: (context) => FirstPage()),
+                  );
+                },
+                child: Icon(Icons.chevron_left, color: Colors.white, size: 27),
+              ),
             );
           } else if (state is DetailErrorState) {
-            return Text(
-              state.errorDetail,
-              style: TextStyle(color: Colors.white),
+            return Center(
+              child: Text(
+                state.errorDetail,
+                style: TextStyle(color: Colors.white, fontSize: 20),
+              ),
             );
           }
           return SizedBox();

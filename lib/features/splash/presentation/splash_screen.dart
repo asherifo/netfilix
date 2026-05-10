@@ -1,7 +1,6 @@
 import 'package:lottie/lottie.dart';
 
 import 'package:flutter/material.dart';
-import 'package:netfilix/features/home/presentation/screen/home_page.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -16,10 +15,11 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
     Future.delayed(Duration(seconds: 4), () {
       if (mounted) {
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => Homepage()),
-        );
+        Navigator.pushReplacementNamed(context, '/SignAccount');
+        // Navigator.pushReplacement(
+        //   context,
+        //   MaterialPageRoute(builder: (context) => AddAccount()),
+        // );
       }
     });
   }

@@ -1,13 +1,13 @@
-import 'package:netfilix/features/details/data/detail_model.dart';
+import 'package:netfilix/features/home/data/movie_model.dart';
 
 class DetailState {}
 
 class DetailInitialState extends DetailState {}
 
 class DetailSuccessState extends DetailState {
-  final Detailmodel detailmodel;
+  final MovieModel movieDetailModel;
 
-  DetailSuccessState({required this.detailmodel});
+  DetailSuccessState({required this.movieDetailModel});
 }
 
 class DetailErrorState extends DetailState {

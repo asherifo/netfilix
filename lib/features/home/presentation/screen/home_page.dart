@@ -1,146 +1,87 @@
 import 'package:flutter/material.dart';
-import 'package:netfilix/features/home/presentation/screen/first_page.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:netfilix/features/home/logic/cubit.dart';
 
-class Homepage extends StatelessWidget {
-  const Homepage({super.key});
+import 'package:netfilix/features/home/presentation/widget/cate_buttons.dart';
+import 'package:netfilix/features/home/presentation/widget/now_watching_widget.dart';
+import 'package:netfilix/features/home/presentation/widget/popular_widget.dart';
+import 'package:netfilix/features/home/presentation/widget/top_rated_widget.dart';
+
+class HomePage extends StatelessWidget {
+  const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.black,
-        title: SingleChildScrollView(
-          child: Column(
-            children: [
-              SizedBox(height: 25),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  Text(
-                    "Who's Watching?",
-                    style: TextStyle(color: Colors.white),
-                  ),
-                  SizedBox(width: 50),
-                  InkWell(
-                    onTap: () {
-                      // ignore: avoid_print
-                      print("Edit your Account");
-                    },
-                    child: Text(
-                      'Edit',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 16,
-                        fontWeight: FontWeight.normal,
-                      ),
-                    ),
-                  ),
-                  SizedBox(width: 10),
+    return BlocProvider(
+      create: (context) => HomeCubit()..getNowPlaying(),
+      child: Scaffold(
+        body: SingleChildScrollView(
+          child: Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [
+                  Color.fromRGBO(57, 16, 30, 1), // Deep Blue
+                  Color.fromRGBO(8, 2, 4, 1), // Lighter Blue
                 ],
               ),
-            ],
-          ),
-        ),
-        centerTitle: true,
-      ),
-      body: SingleChildScrollView(
-        child: Center(
-          heightFactor: 2,
-          child: Container(
-            width: 231,
-            height: 289,
-            color: Colors.transparent,
-            child: Column(
-              children: [
-                Row(
-                  // crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    InkWell(
-                      onTap: () {
-                        // ignore: avoid_print
-                        print('Saurabh Account');
-                        Navigator.of(context).push(
-                          MaterialPageRoute(builder: (context) => FirstPage()),
-                        );
-                      },
-                      child: Column(
-                        children: [
-                          Image.asset(
-                            "assets/images/1.png",
-                            height: 105,
-                            width: 105,
-                          ),
-                          Text(
-                            'Saurabh S...',
-                            style: TextStyle(color: Colors.white),
-                          ),
-                        ],
-                      ),
-                    ),
-                    SizedBox(width: 10),
-                    InkWell(
-                      onTap: () {
-                        // ignore: avoid_print
-                        print('Childrens Account');
-                        Navigator.of(context).push(
-                          MaterialPageRoute(builder: (context) => FirstPage()),
-                        );
-                      },
-                      child: Column(
-                        children: [
-                          Image.asset(
-                            "assets/images/2.png",
-                            height: 105,
-                            width: 105,
-                          ),
-                          Text(
-                            'Children',
-                            style: TextStyle(color: Colors.white),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(height: 15),
-                InkWell(
-                  onTap: () {
-                    // ignore: avoid_print
-                    print('Add Account');
-                    Navigator.of(context).push(
-                      MaterialPageRoute(builder: (context) => FirstPage()),
-                    );
-                  },
-                  child: Column(
-                    children: [
-                      Container(
-                        height: 105,
-                        width: 105,
-                        color: Colors.transparent,
-                        child: Center(
-                          child: Container(
-                            height: 105,
-                            width: 105,
-                            decoration: BoxDecoration(
-                              border: Border.all(color: Colors.white, width: 1),
-                              borderRadius: BorderRadius.circular(7.84),
-                            ),
-                            child: Icon(
-                              Icons.add,
-                              color: Colors.white,
-                              size: 40,
-                            ),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.only(left: 10),
+              child: Column(
+                children: [
+                  SafeArea(
+                    child: Row(
+                      children: [
+                        Text(
+                          'For Saurabh Saini',
+                          style: TextStyle(color: Colors.white, fontSize: 22),
+                        ),
+                        Spacer(flex: 1),
+                        InkWell(
+                          onTap: () {},
+                          child: Image.asset(
+                            'assets/icons/shareIcon.png',
+                            width: 22,
+                            height: 18,
                           ),
                         ),
-                      ),
-                      Text(
-                        'Add Profile',
-                        style: TextStyle(color: Colors.white),
-                      ),
+                        SizedBox(width: 15),
+                        InkWell(
+                          onTap: () {},
+                          child: Image.asset(
+                            'assets/icons/downloadIcon.png',
+                            width: 22,
+                            height: 18,
+                          ),
+                        ),
+
+                        IconButton(
+                          onPressed: () {},
+                          icon: Icon(Icons.search, color: Colors.white),
+                        ),
+                      ],
+                    ),
+                  ),
+
+                  Catebuttons(
+                    cateName: [
+                      'TV Shows',
+                      'Movies',
+                      'Comedy Show',
+                      'Action',
+                      'Romance',
                     ],
                   ),
-                ),
-              ],
+
+                  NowWatchingWidget(),
+
+                  PopularWidget(),
+                  TopRatedWidget(),
+                  NowWatchingWidget(),
+                ],
+              ),
             ),
           ),
         ),

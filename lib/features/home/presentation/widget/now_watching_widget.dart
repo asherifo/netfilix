@@ -22,7 +22,11 @@ class NowWatchingWidget extends StatelessWidget {
           BlocBuilder<HomeCubit, HomeState>(
             builder: (context, state) {
               if (state is HomeLoadingState) {
-                return CircularProgressIndicator();
+                return Center(
+                  child: CircularProgressIndicator(
+                    backgroundColor: Colors.white,
+                  ),
+                );
               } else if (state is HomeSuccessState) {
                 return SizedBox(
                   height: 158,
@@ -38,7 +42,8 @@ class NowWatchingWidget extends StatelessWidget {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => Detailmovie(),
+                                builder: (context) =>
+                                    Detailmovie(indexMovie: index),
                               ),
                             );
                           },
