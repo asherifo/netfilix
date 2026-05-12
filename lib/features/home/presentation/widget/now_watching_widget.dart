@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:netfilix/features/details/presentation/detailmovie.dart';
+
 import 'package:netfilix/features/home/logic/cubit.dart';
 import 'package:netfilix/features/home/logic/state.dart';
 
@@ -39,12 +39,10 @@ class NowWatchingWidget extends StatelessWidget {
                         padding: const EdgeInsets.all(8.0),
                         child: InkWell(
                           onTap: () {
-                            Navigator.push(
+                            Navigator.pushNamed(
                               context,
-                              MaterialPageRoute(
-                                builder: (context) =>
-                                    Detailmovie(indexMovie: index),
-                              ),
+                              '/detailMovie',
+                              arguments: index,
                             );
                           },
                           child: Image.network(

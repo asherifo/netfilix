@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:netfilix/features/home/presentation/screen/home_page.dart';
-import 'package:netfilix/features/home/presentation/screen/add_account_page.dart';
-import 'package:netfilix/features/splash/presentation/splash_screen.dart';
+
+import 'package:netfilix/routes/route.dart';
 
 void main() {
   runApp(const MyApp());
@@ -26,11 +25,7 @@ class MyApp extends StatelessWidget {
 
       initialRoute: '/SplashScreen',
 
-      routes: <String, WidgetBuilder>{
-        '/HomePage': (context) => HomePage(),
-        '/SplashScreen': (context) => SplashScreen(),
-        '/SignAccount': (context) => AddAccount(),
-      },
+      routes: routes,
     );
   }
 }

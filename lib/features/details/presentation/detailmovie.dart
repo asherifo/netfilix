@@ -5,11 +5,12 @@ import 'package:netfilix/features/details/logic/detail_state.dart';
 
 // ignore: must_be_immutable
 class Detailmovie extends StatelessWidget {
-  const Detailmovie({super.key, required this.indexMovie});
-  final int indexMovie;
+  const Detailmovie({super.key});
+  // final int indexMovie;
 
   @override
   Widget build(BuildContext context) {
+    final int imageIndex = ModalRoute.of(context)!.settings.arguments as int;
     return BlocProvider(
       create: (context) => DetailCubit()..getDetailsMovie(),
       child: BlocBuilder<DetailCubit, DetailState>(
@@ -33,7 +34,7 @@ class Detailmovie extends StatelessWidget {
                     Padding(
                       padding: EdgeInsets.only(top: 40),
                       child: Image.network(
-                        "https://image.tmdb.org/t/p/w500${movie.results![indexMovie].backdropPath!}",
+                        "https://image.tmdb.org/t/p/w500${movie.results![imageIndex].backdropPath!}",
                         fit: BoxFit.fill,
                         height: 222,
                         width: double.infinity,
@@ -42,7 +43,7 @@ class Detailmovie extends StatelessWidget {
                     Padding(
                       padding: EdgeInsets.only(top: 1, left: 10),
                       child: Text(
-                        movie.results![indexMovie].originalTitle!,
+                        movie.results![imageIndex].originalTitle!,
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 16,
@@ -55,7 +56,7 @@ class Detailmovie extends StatelessWidget {
                       child: Row(
                         children: [
                           Text(
-                            movie.results![indexMovie].releaseDate!,
+                            movie.results![imageIndex].releaseDate!,
                             style: TextStyle(
                               color: Colors.white,
                               fontSize: 16,
@@ -64,7 +65,7 @@ class Detailmovie extends StatelessWidget {
                           ),
                           Image.asset('assets/icons/ratingIcon.png'),
                           Text(
-                            ' ${movie.results![indexMovie].voteAverage!} ',
+                            ' ${movie.results![imageIndex].voteAverage!} ',
                             style: TextStyle(
                               color: Colors.white,
                               fontSize: 16,
@@ -79,7 +80,7 @@ class Detailmovie extends StatelessWidget {
                     Padding(
                       padding: EdgeInsets.only(left: 8, right: 8, bottom: 8),
                       child: Text(
-                        movie.results![indexMovie].overview!,
+                        movie.results![imageIndex].overview!,
                         style: TextStyle(
                           fontSize: 12,
                           fontWeight: FontWeight(400),
@@ -207,12 +208,10 @@ class Detailmovie extends StatelessWidget {
                         itemBuilder: (context, index) {
                           return InkWell(
                             onTap: () {
-                              Navigator.push(
+                              Navigator.pushNamed(
                                 context,
-                                MaterialPageRoute(
-                                  builder: (context) =>
-                                      Detailmovie(indexMovie: index),
-                                ),
+                                '/detailMovie',
+                                arguments: index,
                               );
                             },
                             child: Image.network(
